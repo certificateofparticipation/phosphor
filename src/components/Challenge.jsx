@@ -1,10 +1,8 @@
-import React from "react";
-
-export default function Challenge({title, answer, children}: {title: string; answer: string; children: React.ReactNode}) {
+export default function Challenge({title, answer, children}) {
     function submit(e) {
-        e.preventDefault()
-        let response: string = e.target[0].value
-        if (response == answer) {
+        let response = e.target.elements.answer.value
+        alert(response)
+        if (response === answer) {
             alert("Correct! (insert effect here lol)")
         } else {
             alert("Try again!")
