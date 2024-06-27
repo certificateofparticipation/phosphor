@@ -1,0 +1,66 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import IndexSection from "../../components/IndexSection.astro";
+import IndexPage from "../../components/IndexPage.astro";
+---
+
+<Layout>
+    <div class={"min-w-full min-h-full flex items-center justify-center gap-x-4 px-10 my-20"}>
+        <div class={"w-full flex flex-col justify-center items-center text-center gap-y-4"}>
+            <h1 class={"text-5xl font-bold w-full"}>Chapter 1</h1>
+            <p class={"w-full"}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci architecto aspernatur blanditiis debitis delectus distinctio ex id impedit incidunt laborum perferendis, quas sed sequi sunt tempore ullam voluptas! In!</p>
+            <p class={"w-full"}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquid animi dolorum enim eum iure maiores, maxime minima nihil odit quis quisquam similique suscipit voluptas, voluptatum. Aliquam cum, qui. Rem?</p>
+            <p class={"w-full"}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur dicta, distinctio ex iste itaque magnam sequi temporibus ullam vero voluptas. Blanditiis dolorum eos quam rerum temporibus vel voluptas. Fugiat, reiciendis?</p>
+        </div>
+        <div class={"w-full grid grid-cols-2 gap-x-5 gap-y-5 text-left border-l-2 pl-5"}>
+            <IndexSection name={"Cryptography"}>
+                <IndexPage href={"chapter-1/cryptography/introduction"}>Introduction</IndexPage>
+                <IndexPage>Common Ciphers</IndexPage>
+                <IndexPage>Hashes</IndexPage>
+                <IndexPage>Salts</IndexPage>
+                <IndexPage>RSA 1</IndexPage>
+                <IndexPage>XOR</IndexPage>
+            </IndexSection>
+            <IndexSection name={"Forensics"}>
+                <IndexPage>Introduction</IndexPage>
+                <IndexPage>File Formats & Signatures</IndexPage>
+                <IndexPage>Steganography - Embedded Files</IndexPage>
+                <IndexPage>Steganography - Least/Most Significant Byte</IndexPage>
+                <IndexPage>Wireshark 1</IndexPage>
+                <IndexPage>John the Ripper</IndexPage>
+            </IndexSection>
+            <IndexSection name={"Open Source Intelligence"}>
+                <IndexPage>Introduction</IndexPage>
+                <IndexPage>Sherlock / Recon-NG</IndexPage>
+                <IndexPage>Maltego</IndexPage>
+                <IndexPage>Wigle.net</IndexPage>
+                <IndexPage>Google Dorking</IndexPage>
+            </IndexSection>
+            <IndexSection name={"Reverse Engineering"}>
+                <IndexPage>Introduction</IndexPage>
+                <IndexPage>Networking Basics</IndexPage>
+                <IndexPage>Pwntools</IndexPage>
+                <IndexPage>Ghidra</IndexPage>
+                <IndexPage>Randcrack</IndexPage>
+            </IndexSection>
+            <IndexSection name={"Web Exploitation"}>
+                <IndexPage>Introduction</IndexPage>
+                <IndexPage>Website Basics</IndexPage>
+                <IndexPage>Developer Tools</IndexPage>
+                <IndexPage>Directory Traversal</IndexPage>
+                <IndexPage>Database Basics</IndexPage>
+                <IndexPage>SQL Injection</IndexPage>
+                <IndexPage>Command Injection</IndexPage>
+            </IndexSection>
+            <IndexSection name={"Binary Exploitation"}>
+                <IndexPage>Introduction</IndexPage>
+                <IndexPage>C++ Basics & Pointers</IndexPage>
+                <IndexPage>The Stack</IndexPage>
+                <IndexPage>Stack Overflow</IndexPage>
+                <IndexPage>Assembly Basics & Registers</IndexPage>
+                <IndexPage>Pwndbg</IndexPage>
+                <IndexPage>Ret2Win</IndexPage>
+            </IndexSection>
+        </div>
+    </div>
+</Layout>

@@ -1,0 +1,13 @@
+---
+import "../styles/indexes.css"
+
+interface Props {
+    href: string
+}
+
+const { href } = Astro.props
+---
+
+<li class={ href != undefined ? "text-xl italic w-fit index-page-animation" : "text-xl italic w-fit text-gray-500" }>
+    <a href={ "/docs/" + href }><slot/></a>
+</li>

@@ -1,0 +1,25 @@
+---
+export const prerender = false;
+
+import Layout from "../../../../layouts/Layout.astro";
+import { getEntry } from 'astro:content';
+
+const { chapter, section, page } = Astro.params;
+
+const entry = await getEntry(chapter, section + "/" + page)
+const { Content, headings } = await entry.render()
+
+---
+
+<Layout>
+    <p>{ entry.data.title }</p>
+    <Content/>
+</Layout>
+
+<style>
+    h1 {
+        @apply text-5xl
+    }
+</style>
+
+
