@@ -1,0 +1,47 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import IndexSection from "../../components/IndexSection.astro";
+import IndexPage from "../../components/IndexPage.astro";
+---
+
+<Layout>
+    <div class={"min-w-full flex-grow flex items-center justify-center gap-x-4 px-10 my-20"}>
+        <div class={"w-full flex flex-col justify-center items-center text-center gap-y-4"}>
+            <h1 class={"text-5xl font-bold w-full"}>Chapter 2</h1>
+            <p class={"w-full"}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci architecto aspernatur blanditiis debitis delectus distinctio ex id impedit incidunt laborum perferendis, quas sed sequi sunt tempore ullam voluptas! In!</p>
+            <p class={"w-full"}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquid animi dolorum enim eum iure maiores, maxime minima nihil odit quis quisquam similique suscipit voluptas, voluptatum. Aliquam cum, qui. Rem?</p>
+            <p class={"w-full"}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur dicta, distinctio ex iste itaque magnam sequi temporibus ullam vero voluptas. Blanditiis dolorum eos quam rerum temporibus vel voluptas. Fugiat, reiciendis?</p>
+        </div>
+        <div class={"w-full grid grid-cols-2 gap-x-5 gap-y-3 text-left border-l-2 pl-5"}>
+            <IndexSection name={"Cryptography"}>
+                <IndexPage>Introduction</IndexPage>
+                <IndexPage>Known Plaintext Attack</IndexPage>
+                <IndexPage>Many-time Pad Attack</IndexPage>
+                <IndexPage>RSA Attacks</IndexPage>
+                <IndexPage>AES Attacks</IndexPage>
+            </IndexSection>
+            <IndexSection name={"Forensics"}>
+                <IndexPage>Introduction</IndexPage>
+                <IndexPage>Autopsy</IndexPage>
+                <IndexPage>Volatility</IndexPage>
+                <IndexPage>Aircrack-NG</IndexPage>
+                <IndexPage>Wireshark 2</IndexPage>
+            </IndexSection>
+            <IndexSection name={"Web Exploitation"}>
+                <IndexPage>Introduction</IndexPage>
+                <IndexPage>Cross-Site Scripting</IndexPage>
+                <IndexPage>Cross-site Request Forgery</IndexPage>
+                <IndexPage>Server side Request Forgery</IndexPage>
+                <IndexPage>Server-side Template Injection</IndexPage>
+                <IndexPage>External XML Entity Injection</IndexPage>
+            </IndexSection>
+            <IndexSection name={"Binary Exploitation"}>
+                <IndexPage>Introduction</IndexPage>
+                <IndexPage>Format String Vulnerability</IndexPage>
+                <IndexPage>Stack Canary</IndexPage>
+                <IndexPage>The Heap</IndexPage>
+                <IndexPage>Heap Exploitation</IndexPage>
+            </IndexSection>
+        </div>
+    </div>
+</Layout>

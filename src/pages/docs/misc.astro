@@ -1,0 +1,54 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import IndexSection from "../../components/IndexSection.astro";
+import IndexPage from "../../components/IndexPage.astro";
+---
+
+<Layout>
+    <div class={"min-w-full flex-grow flex items-center justify-center px-10 my-20"}>
+        <div class={"grid grid-cols-12 gap-x-4"}>
+            <div class={"w-full flex flex-col justify-center items-center text-center gap-y-4 col-span-6"}>
+                <h1 class={"text-5xl font-bold w-full"}>Miscellaneous</h1>
+                <p class={"w-full"}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci
+                    architecto aspernatur blanditiis debitis delectus distinctio ex id impedit incidunt laborum
+                    perferendis, quas sed sequi sunt tempore ullam voluptas! In!</p>
+                <p class={"w-full"}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquid animi
+                    dolorum enim eum iure maiores, maxime minima nihil odit quis quisquam similique suscipit
+                    voluptas,
+                    voluptatum. Aliquam cum, qui. Rem?</p>
+                <p class={"w-full"}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur dicta,
+                    distinctio ex iste itaque magnam sequi temporibus ullam vero voluptas. Blanditiis dolorum eos
+                    quam
+                    rerum temporibus vel voluptas. Fugiat, reiciendis?</p>
+            </div>
+            <div class={"w-full grid grid-cols-1 gap-x-5 gap-y-3 text-left border-l-2 pl-5 col-span-3"}>
+                <IndexSection name={"Introduction"}>
+                    <IndexPage href={"/misc/introduction"}>Introduction to CTFs</IndexPage>
+                </IndexSection>
+                <IndexSection name={"Setting Up"}>
+                    <IndexPage>Introduction</IndexPage>
+                    <IndexPage>VirtualBox</IndexPage>
+                    <IndexPage>VMWare Workstation 17</IndexPage>
+                    <IndexPage>Hyper-V</IndexPage>
+                </IndexSection>
+                <IndexSection name={"Linux Commands"}>
+                    <IndexPage>Introduction</IndexPage>
+                    <IndexPage>The Terminal</IndexPage>
+                    <IndexPage>Nano Text Editor</IndexPage>
+                </IndexSection>
+            </div>
+            <div class={"w-full grid grid-cols-1 gap-x-5 gap-y-3 text-left border-l-2 pl-5 col-span-3"}>
+                <IndexSection name={"Cheatsheets"}>
+                    <IndexPage>Websites</IndexPage>
+                    <IndexPage>File Signatures</IndexPage>
+                    <IndexPage>Registers & Pwndbg</IndexPage>
+                </IndexSection>
+                <IndexSection name={"Extras"}>
+                    <IndexPage>Challenges Index</IndexPage>
+                    <IndexPage>Terminology</IndexPage>
+                    <IndexPage>Credits</IndexPage>
+                </IndexSection>
+            </div>
+        </div>
+    </div>
+</Layout>
