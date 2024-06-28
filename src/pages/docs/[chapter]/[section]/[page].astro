@@ -2,11 +2,17 @@
 export const prerender = false;
 
 import Layout from "../../../../layouts/Layout.astro";
-import { getEntry } from 'astro:content';
+import { getEntry, getCollection } from 'astro:content';
 
 const { chapter, section, page } = Astro.params;
 
 const slug: string = chapter + "/" + section + "/" + page
+const entries = await getCollection("guides")
+
+if ((entries.map((entry) => entry["slug"]) as string[]).indexOf(slug) == -1) {
+    return Astro.redirect("/404")
+}
+
 const entry = await getEntry("guides", slug)
 
 const { Content, headings } = await entry!.render()
@@ -14,8 +20,16 @@ const { Content, headings } = await entry!.render()
 ---
 
 <Layout title={ entry!.data.title }>
-    <div class={"content px-24 py-12 flex flex-col gap-y-2"}>
-        <Content/>
+    <div class={"flex flex-grow px-56 py-12 gap-x-8"}>
+        <div class={"bg-background-800 px-8 min-w-fit text-left"}>
+            <p class={"capitalize"}>{ chapter.replace("-", " ") }</p>
+            <div class={"border-t-2 border-accent-600"}>
+
+            </div>
+        </div>
+        <div class={"content flex flex-col gap-y-2"}>
+            <Content/>
+        </div>
     </div>
 </Layout>
 
