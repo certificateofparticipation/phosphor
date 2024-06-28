@@ -6,22 +6,24 @@ import { getEntry } from 'astro:content';
 
 const { chapter, section, page } = Astro.params;
 
-const slug: string = section + "/" + page
-// wtf? collection parameter takes in a value from ContentEntryMap from .astro/types.d.ts, yet that map is private lol
-const entry = await getEntry("chapter-1", slug)
+const slug: string = chapter + "/" + section + "/" + page
+const entry = await getEntry("guides", slug)
 
 const { Content, headings } = await entry!.render()
 
 ---
 
 <Layout title={ entry!.data.title }>
-    <p>{ entry!.data.title }</p>
-    <Content/>
+    <div class={"content px-24 py-12 flex flex-col gap-y-2"}>
+        <Content/>
+    </div>
 </Layout>
 
-<style>
-    h1 {
-        @apply text-5xl
+<style is:global>
+    .content {
+        h1 {
+            @apply text-5xl
+        }
     }
 </style>
 

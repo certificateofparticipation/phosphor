@@ -1,5 +1,5 @@
 import { z, defineCollection } from 'astro:content';
-const chapter1Collection = defineCollection({
+const guideCollection = defineCollection({
     type: 'content',
     schema: z.object({
         title: z.string(),
@@ -7,5 +7,5 @@ const chapter1Collection = defineCollection({
     }),
 });
 export const collections = {
-    'chapter-1': chapter1Collection,
+    'guides': guideCollection,
 };
