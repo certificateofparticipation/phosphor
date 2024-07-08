@@ -3,7 +3,7 @@ title: "Introduction"
 description: "Testing description"
 ---
 import Challenge from "../../../../components/Challenge.tsx"
-import Hint from "../../../../components/Hint.js";
+import Hint from "../../../../components/Hint.tsx";
 
 # **Cryptography**
 
@@ -21,9 +21,13 @@ In the real world, cryptography is used to secure traffic between you and critic
 
 Cryptography is a large reason these services can continue to operate today.
 
-<Challenge client:load title={"Testing challenge"} answer={"test"}>
+<Challenge client:visible title={"Testing challenge"} answer={"test"}>
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias at commodi earum error ex facilis fugit in, inventore ipsa magni modi, numquam perspiciatis possimus, quibusdam recusandae reiciendis voluptas. Maiores, reprehenderit.
-    <Hint>
+    <Hint client:visible>
         Testing Hint
     </Hint>
 </Challenge>
+
+<Hint client:visible>
+    Testing Hint 2
+</Hint>

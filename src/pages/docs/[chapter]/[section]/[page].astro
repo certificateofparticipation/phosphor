@@ -16,14 +16,16 @@ if ((entries.map((entry) => entry.slug) as string[]).indexOf(slug) == -1) {
 const sectionEntries = new Map()
 entries.forEach((entry) => {
     let firstSlash = entry.slug.indexOf("/")
-    let section = entry.slug.substring(firstSlash + 1, entry.slug.indexOf("/", firstSlash + 1))
-    if (sectionEntries.has(section)) {
-        let existingArray: [string, string | null][] = sectionEntries.get(section)
+    let secondSlash = entry.slug.indexOf("/", firstSlash + 1)
+    let entrySection = entry.slug.substring(firstSlash + 1, secondSlash)
+
+    if (sectionEntries.has(entrySection)) {
+        let existingArray: [string, string | null][] = sectionEntries.get(entrySection)
         let toPush: [string, string | null] = [entry.data.title, (entry.slug == slug ? null : entry.slug)]
         existingArray.push(toPush)
-        sectionEntries.set(section, existingArray)
+        sectionEntries.set(entrySection, existingArray)
     } else {
-        sectionEntries.set(section, [[entry.data.title, (entry.slug == slug ? null : entry.slug)]])
+        sectionEntries.set(entrySection, [[entry.data.title, (entry.slug == slug ? null : entry.slug)]])
     }
 })
 
@@ -48,7 +50,8 @@ const { Content, headings } = await entry!.render()
                                                         <p>{ title }</p>
                                                     </a>
                                                 :
-                                                    <a class={"px-3.5 py-2 hover:bg-accent-700 rounded-md"} href={slug}>
+                                                    <a class={"px-3.5 py-2 hover:bg-accent-700 rounded-md"}
+                                                       href={"/docs/" + slug}>
                                                         <p>{ title }</p>
                                                     </a>
                                             )
@@ -60,7 +63,7 @@ const { Content, headings } = await entry!.render()
                 }
             </div>
         </div>
-        <div class={"content flex flex-col gap-y-2"}>
+        <div class={"content flex flex-col gap-y-2.5"}>
             <Content/>
         </div>
     </div>

@@ -29,9 +29,9 @@ export default function Challenge({title, answer, children}: {title: string; ans
     }
 
     return (
-        <div className={"bg-background-800 rounded-3xl px-8 py-6"}>
+        <div className={"bg-background-800 rounded-3xl px-8 py-6 my-2"}>
             <h1 className={"text-3xl font-bold"}>{title}</h1>
-            <div className={"my-2"}>
+            <div className={"my-4 flex flex-col gap-y-2"}>
                 { children }
             </div>
             <form onSubmit={submit} className={"flex flex-col gap-y-4"}>
