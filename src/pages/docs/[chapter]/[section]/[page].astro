@@ -15,16 +15,15 @@ if ((entries.map((entry) => entry.slug) as string[]).indexOf(slug) == -1) {
 
 const sectionEntries = new Map()
 entries.forEach((entry) => {
-    if (entry.slug) {
-        let firstSlash = entry.slug.indexOf("/")
-        let section = entry.slug.substring(firstSlash + 1, entry.slug.indexOf("/", firstSlash + 1))
-        if (sectionEntries.has(section)) {
-            let existingArray: string[] = sectionEntries.get(section)
-            console.log(existingArray)
-            sectionEntries.set(section, existingArray.push(entry.data.title))
-        } else {
-            sectionEntries.set(section, [entry.data.title])
-        }
+    let firstSlash = entry.slug.indexOf("/")
+    let section = entry.slug.substring(firstSlash + 1, entry.slug.indexOf("/", firstSlash + 1))
+    if (sectionEntries.has(section)) {
+        let existingArray: [string, string | null][] = sectionEntries.get(section)
+        let toPush: [string, string | null] = [entry.data.title, (entry.slug == slug ? null : entry.slug)]
+        existingArray.push(toPush)
+        sectionEntries.set(section, existingArray)
+    } else {
+        sectionEntries.set(section, [[entry.data.title, (entry.slug == slug ? null : entry.slug)]])
     }
 })
 
@@ -36,9 +35,28 @@ const { Content, headings } = await entry!.render()
 <Layout title={ entry!.data.title }>
     <div class={"flex flex-grow px-48 py-12 gap-x-8"}>
         <div class={"bg-background-800 px-4 py-4 min-w-fit text-left rounded-xl"}>
-            <p class={"capitalize"}>{ chapter.replace("-", " ") }</p>
-            <div class={"border-t-2 border-accent-600"}>
+            <div class={"min-w-32"}>
                 {
+                    Array.from(sectionEntries).map(([key, value]) => {
+                        return (
+                                <h3 class={"capitalize border-b-2 border-accent-600 mb-2"}>{ key }</h3>
+                                <div class={"flex flex-col gap-y-1"}>
+                                    { (value as [string, string | null][]).map(([title, slug]) => {
+                                        return (
+                                            (slug == null ?
+                                                    <a class={"px-3.5 py-2 bg-accent-500 rounded-md"}>
+                                                        <p>{ title }</p>
+                                                    </a>
+                                                :
+                                                    <a class={"px-3.5 py-2 hover:bg-accent-700 rounded-md"} href={slug}>
+                                                        <p>{ title }</p>
+                                                    </a>
+                                            )
+                                        )
+                                    }) }
+                                </div>
+                        )
+                    })
                 }
             </div>
         </div>
