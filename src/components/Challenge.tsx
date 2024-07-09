@@ -1,13 +1,13 @@
 import React from "react";
 import confetti from 'canvas-confetti';
 
-export default function Challenge({title, answer, children}: {title: string; answer: string; children: React.ReactNode}) {
+export default function Challenge({title, answer, placeholder, children}: {title: string; answer: string[]; placeholder: string; children: React.ReactNode}) {
     function submit(e: React.SyntheticEvent) {
         e.preventDefault()
         const target = e.target as typeof e.target & {
             answer: { value: string };
         };
-        if (target.answer.value === answer) {
+        if (answer.indexOf(target.answer.value) != -1) {
             alert("Correct!")
             confetti({
                 origin: {
@@ -30,12 +30,12 @@ export default function Challenge({title, answer, children}: {title: string; ans
 
     return (
         <div className={"bg-background-800 rounded-3xl px-8 py-6 my-2"}>
-            <h1 className={"text-3xl font-bold"}>{title}</h1>
-            <div className={"my-4 flex flex-col gap-y-2"}>
+            <h1 className={"text-4xl font-bold"}>{title}</h1>
+            <div className={"my-3 flex flex-col gap-y-2"}>
                 { children }
             </div>
             <form onSubmit={submit} className={"flex flex-col gap-y-4"}>
-                <input name={"answer"} placeholder={"flag{...}"} className={"bg-accent-600 p-3"}/>
+                <input name={"answer"} placeholder={ placeholder } className={"bg-accent-600 p-3"} autoComplete={"off"}/>
                 <button type={"submit"} className={"border-2 border-accent-600 p-3 rounded-3xl"}>Submit</button>
             </form>
         </div>

@@ -1,6 +1,7 @@
 ---
 title: "Introduction"
 description: "Testing description"
+order: 0
 ---
 import Challenge from "../../../../components/Challenge.tsx"
 import Hint from "../../../../components/Hint.tsx";
@@ -9,25 +10,23 @@ import Hint from "../../../../components/Hint.tsx";
 
 ## _Cryptography refers to hiding information or text, where only the intended people with the required knowledge can read it._
 
-Cryptography is a common topic in every CTF, involving you to identify and decrypt messages for your flag.
+In essence, you use cryptography to communicate secretly with someone else.
+In order to achieve this, you would **"encrypt"** a message, making it unreadable to everybody. The resulting encrypted message is called the **"the ciphertext"**.
 
-The key to handling cryptography challenges well is experience.
+When your recipient receives your ciphertext, they would **"decrypt"** your ciphertext in order to read your original message, called the **"cipher text"**.
+The method of encrypting/decrypting a message is called a **"cipher"**, and some ciphers utilize another message/value called the **"key"**.
 
-It is definitely an easy to grasp topic and at the end of this section you should be able to crack simple and intermediate cryptography challenges.
-
-In this chapter, we will go through easy and common ciphers, hashes, and the basics of RSA and XOR.
+In the context of CTFs, you will be trying to decrypt a ciphertext into its plaintext in order to get your flag.
 
 In the real world, cryptography is used to secure traffic between you and critical services - banking, messaging, internet browsing and more.
-
 Cryptography is a large reason these services can continue to operate today.
 
-<Challenge client:visible title={"Testing challenge"} answer={"test"}>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias at commodi earum error ex facilis fugit in, inventore ipsa magni modi, numquam perspiciatis possimus, quibusdam recusandae reiciendis voluptas. Maiores, reprehenderit.
-    <Hint client:visible>
-        Testing Hint
-    </Hint>
+<Challenge client:visible title={"Challenge 1"} answer={["plaintext", "Plaintext", "plain text", "Plain text"]} placeholder={"..."}>
+    <p>What type of text is this?</p>
+    <p className={"italic font-bold underline text-xl"}>Hello world!</p>
 </Challenge>
 
-<Hint client:visible>
-    Testing Hint 2
-</Hint>
+<Challenge client:visible title={"Challenge 2"} answer={["ciphertext", "Ciphertext", "cipher text", "Cipher text"]} placeholder={"..."}>
+    <p>What type of text is this?</p>
+    <p className={"italic font-bold underline text-xl"}>SGVsbG8gd29ybGQh</p>
+</Challenge>

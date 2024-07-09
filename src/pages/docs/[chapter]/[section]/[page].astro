@@ -20,14 +20,15 @@ entries.forEach((entry) => {
     let entrySection = entry.slug.substring(firstSlash + 1, secondSlash)
 
     if (sectionEntries.has(entrySection)) {
-        let existingArray: [string, string | null][] = sectionEntries.get(entrySection)
-        let toPush: [string, string | null] = [entry.data.title, (entry.slug == slug ? null : entry.slug)]
+        let existingArray: [string, number, string | null][] = sectionEntries.get(entrySection)
+        let toPush: [string, number, string | null] = [entry.data.title, entry.data.order, (entry.slug == slug ? null : entry.slug)]
         existingArray.push(toPush)
         sectionEntries.set(entrySection, existingArray)
     } else {
-        sectionEntries.set(entrySection, [[entry.data.title, (entry.slug == slug ? null : entry.slug)]])
+        sectionEntries.set(entrySection, [[entry.data.title, entry.data.order, (entry.slug == slug ? null : entry.slug)]])
     }
 })
+
 
 const entry = await getEntry("guides", slug)
 
@@ -37,27 +38,31 @@ const { Content, headings } = await entry!.render()
 <Layout title={ entry!.data.title }>
     <div class={"flex flex-grow px-48 py-12 gap-x-8"}>
         <div class={"bg-background-800 px-4 py-4 min-w-fit text-left rounded-xl"}>
-            <div class={"min-w-32"}>
+            <div class={"min-w-32 flex flex-col gap-y-3.5"}>
                 {
                     Array.from(sectionEntries).map(([key, value]) => {
                         return (
+                            <div>
                                 <h3 class={"capitalize border-b-2 border-accent-600 mb-2"}>{ key }</h3>
                                 <div class={"flex flex-col gap-y-1"}>
-                                    { (value as [string, string | null][]).map(([title, slug]) => {
+                                    { (value as [string, number, string | null][]).sort(([title, order, slug]) => {
+                                        return order
+                                    }).reverse().map(([title, order, slug]) => {
                                         return (
                                             (slug == null ?
-                                                    <a class={"px-3.5 py-2 bg-accent-500 rounded-md"}>
-                                                        <p>{ title }</p>
-                                                    </a>
-                                                :
-                                                    <a class={"px-3.5 py-2 hover:bg-accent-700 rounded-md"}
-                                                       href={"/docs/" + slug}>
-                                                        <p>{ title }</p>
-                                                    </a>
+                                                            <a class={"px-3.5 py-2 bg-accent-500 rounded-md"}>
+                                                                <p>{ title }</p>
+                                                            </a>
+                                                    :
+                                                            <a class={"px-3.5 py-2 hover:bg-accent-700 rounded-md"}
+                                                               href={"/docs/" + slug}>
+                                                                <p>{ title }</p>
+                                                            </a>
                                             )
                                         )
                                     }) }
                                 </div>
+                            </div>
                         )
                     })
                 }
@@ -70,10 +75,8 @@ const { Content, headings } = await entry!.render()
 </Layout>
 
 <style is:global>
-    .content {
-        h1 {
-            @apply text-5xl
-        }
+    .content > h1 {
+        @apply text-5xl
     }
 </style>
 
