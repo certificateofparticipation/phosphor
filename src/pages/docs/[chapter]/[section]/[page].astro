@@ -45,9 +45,17 @@ const { Content, headings } = await entry!.render()
                             <div>
                                 <h3 class={"capitalize border-b-2 border-accent-600 mb-2"}>{ key }</h3>
                                 <div class={"flex flex-col gap-y-1"}>
-                                    { (value as [string, number, string | null][]).sort(([title, order, slug]) => {
-                                        return order
-                                    }).reverse().map(([title, order, slug]) => {
+                                    { (value as [string, number, string | null][]).sort((element1, element2) => {
+                                        let order1 = element1[1]
+                                        let order2 = element2[1]
+                                        if (order1 < order2) {
+                                            return -1
+                                        } else if (order1 > order2) {
+                                            return 1
+                                        } else {
+                                            return 0
+                                        }
+                                    }).map(([title, _, slug]) => {
                                         return (
                                             (slug == null ?
                                                             <a class={"px-3.5 py-2 bg-accent-500 rounded-md"}>
