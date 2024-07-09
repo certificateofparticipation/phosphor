@@ -1,11 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
 ---
+
 <Layout title="Sign In">
     <main class={"min-w-full flex-grow flex flex-col items-center justify-center gap-y-5"}>
-        <h1 class={"text-3xl font-bold"}>Sign In</h1>
+        <h1 class={"text-3xl font-bold"}>Register</h1>
         <div class={"w-fit bg-background-800 rounded-3xl px-8 py-8 flex flex-col justify-center items-center gap-y-4"}>
-            <form action={"/api/auth/signin"} method={"post"} class={"flex flex-col gap-y-4"}>
+            <form action={"/api/auth/register"} method={"post"} class={"flex flex-col gap-y-4"}>
                 <label class={"flex flex-col"}>
                     Email:
                     <input type="text" placeholder="Email" name="email" class="text-black"/>
@@ -14,11 +15,9 @@ import Layout from "../layouts/Layout.astro";
                     Password:
                     <input type="text" placeholder="Password" name="password" class="text-black"/>
                 </label>
-                <button type="submit" class={"border-2 border-accent-600 rounded-xl py-1.5 hover:bg-accent-600"}>Log In</button>
-                <button value="github" name="provider" type="submit">Login with GitHub</button>
+                <button type="submit" class={"border-2 border-accent-600 rounded-xl py-1.5 hover:bg-accent-600"}>Register</button>
             </form>
         </div>
-        <a href={"/register"} class={"text-accent-400 hover:underline"}>Create a new account</a>
+        <a href={"/signin"} class={"text-accent-400 hover:underline"}>Already have an account?</a>
     </main>
 </Layout>
-
