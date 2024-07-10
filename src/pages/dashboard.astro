@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { Image } from "astro:assets";
-import {isLoggedIn} from "../lib/supabase";
+import { isLoggedIn } from "../lib/supabase";
 import ProgressBar from "../components/ProgressBar.astro";
 import * as crypto from "crypto";
 
@@ -15,28 +15,29 @@ if (data == null) {
 }
 
 const email = data.user?.email;
-console.log(data)
 const hash = crypto.createHash('sha256')
 hash.update(email)
 const emailHash = hash.digest('hex')
-console.log(emailHash)
 ---
 
 <Layout title="Dashboard">
     <div class={"mx-10 my-10 flex flex-row gap-x-6"}>
-        <div class={"bg-background-800 rounded-2xl p-3"}>
-            <Image class={"w-full aspect-square"} alt="Profile" inferSize={true} loading="loading" src={"https://www.gravatar.com/avatar/" + emailHash}/>
-            <p>Email:</p>
-            <p>{ email }</p>
-            <p>Username:</p>
-            <p>PLACEHOLDER</p>
-            <p>Stats:</p>
-            <ol>
-              <li># pages read</li>
-                <li># challenges completed</li>
-                <li></li>
-            </ol>
-            <a href={"/api/auth/signout"} class={"text-red-500 hover:underline"}>Sign out</a>
+        <div class={"bg-background-800 rounded-2xl p-3 flex flex-col justify-between"}>
+            <div>
+                <Image class={"w-full aspect-square"} alt="Profile" inferSize={true} loading="loading" src={"https://www.gravatar.com/avatar/" + emailHash}/>
+                <hr class={"mt-3 mb-2 border-accent-300"}/>
+                <h3 class={"text-xl font-bold"}>Email:</h3>
+                <p class={"italic"}>{ email }</p>
+                <h3 class={"text-xl font-bold"}>Username:</h3>
+                <p class={"italic"}>PLACEHOLDER</p>
+                <h3 class={"text-xl font-bold"}>Stats:</h3>
+                <ol>
+                    <li class={"italic"}># pages read</li>
+                    <li class={"italic"}># challenges attempted</li>
+                    <li class={"italic"}># challenges completed</li>
+                </ol>
+            </div>
+            <a href={"/api/auth/signout"} class={"hover:underline font-bold bg-red-500 rounded-2xl text-center py-2"}>Sign out</a>
         </div>
         <div class={"flex-grow flex flex-col gap-y-4"}>
             <div class={"bg-background-800 rounded-2xl p-3"}>

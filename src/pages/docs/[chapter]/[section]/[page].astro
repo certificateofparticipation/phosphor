@@ -16,6 +16,11 @@ if ((entries.map((entry) => entry.slug) as string[]).indexOf(slug) == -1) {
 const sectionEntries = new Map()
 entries.forEach((entry) => {
     let firstSlash = entry.slug.indexOf("/")
+    let entryChapter = entry.slug.substring(0, firstSlash)
+    if (chapter != entryChapter) {
+        return
+    }
+
     let secondSlash = entry.slug.indexOf("/", firstSlash + 1)
     let entrySection = entry.slug.substring(firstSlash + 1, secondSlash)
 
@@ -35,49 +40,60 @@ const entry = await getEntry("guides", slug)
 const { Content, headings } = await entry!.render()
 ---
 
+<span id="top"/>
 <Layout title={ entry!.data.title }>
-    <div class={"flex flex-grow px-48 py-12 gap-x-8"}>
-        <div class={"bg-background-800 px-4 py-4 min-w-fit text-left rounded-xl"}>
-            <div class={"min-w-32 flex flex-col gap-y-3.5"}>
-                {
-                    Array.from(sectionEntries).map(([key, value]) => {
-                        return (
-                            <div>
-                                <h3 class={"capitalize border-b-2 border-accent-600 mb-2"}>{ key }</h3>
-                                <div class={"flex flex-col gap-y-1"}>
-                                    { (value as [string, number, string | null][]).sort((element1, element2) => {
-                                        let order1 = element1[1]
-                                        let order2 = element2[1]
-                                        if (order1 < order2) {
-                                            return -1
-                                        } else if (order1 > order2) {
-                                            return 1
-                                        } else {
-                                            return 0
-                                        }
-                                    }).map(([title, _, slug]) => {
-                                        return (
-                                            (slug == null ?
-                                                            <a class={"px-3.5 py-2 bg-accent-500 rounded-md"}>
-                                                                <p>{ title }</p>
-                                                            </a>
-                                                    :
-                                                            <a class={"px-3.5 py-2 hover:bg-accent-700 rounded-md"}
-                                                               href={"/docs/" + slug}>
-                                                                <p>{ title }</p>
-                                                            </a>
-                                            )
-                                        )
-                                    }) }
-                                </div>
-                            </div>
-                        )
-                    })
-                }
+    <div class={"flex flex-col px-48 py-12 gap-y-12"}>
+        <div class={"flex flex-grow gap-x-8"}>
+            <div class={"bg-background-800 px-4 py-4 text-left rounded-xl min-w-64 max-w-64 h-fit"}>
+                <div class={"flex flex-col gap-y-3.5"}>
+                    {
+                        Array.from(sectionEntries).map(([key, value]) => {
+                            let title = key.replaceAll("-", " ")
+                            return (
+                                    <div>
+                                        <h3 class={"capitalize border-b-2 border-accent-600 mb-2"}>{ title }</h3>
+                                        <div class={"flex flex-col gap-y-1"}>
+                                            { (value as [string, number, string | null][]).sort((element1, element2) => {
+                                                let order1 = element1[1]
+                                                let order2 = element2[1]
+                                                if (order1 < order2) {
+                                                    return -1
+                                                } else if (order1 > order2) {
+                                                    return 1
+                                                } else {
+                                                    return 0
+                                                }
+                                            }).map(([title, _, slug]) => {
+                                                return (
+                                                    (slug == null ?
+                                                                    <a class={"px-3.5 py-2 bg-accent-500 rounded-md"}>
+                                                                        <p>{ title }</p>
+                                                                    </a>
+                                                            :
+                                                                    <a class={"px-3.5 py-2 hover:bg-accent-700 rounded-md"}
+                                                                       href={"/docs/" + slug}>
+                                                                        <p>{ title }</p>
+                                                                    </a>
+                                                    )
+                                                )
+                                            }) }
+                                        </div>
+                                    </div>
+                            )
+                        })
+                    }
+                </div>
+            </div>
+            <div class={"content flex flex-col gap-y-2.5"}>
+                <Content/>
             </div>
         </div>
-        <div class={"content flex flex-col gap-y-2.5"}>
-            <Content/>
+        <div class={"flex justify-center"}>
+            <a class={"bg-accent-600 p-3 rounded-full flex items-center gap-x-2 animate-bounce"} href="#top">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5"/>
+                </svg>
+            </a>
         </div>
     </div>
 </Layout>
@@ -86,6 +102,23 @@ const { Content, headings } = await entry!.render()
     .content > h1 {
         @apply text-5xl
     }
+    .content a {
+        @apply text-accent-400 font-bold hover:underline
+    }
+    .content img {
+        @apply my-2
+    }
+
+    .content > ol,
+    .content > ul {
+        @apply list-disc ml-2.5
+    }
+    .content > ol > li > ol,
+    .content > ul > li > ul {
+        @apply list-disc ml-5
+    }
+
+
 </style>
 
 

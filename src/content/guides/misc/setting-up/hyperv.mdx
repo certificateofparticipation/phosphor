@@ -1,0 +1,36 @@
+---
+title: "Hyper-V Setup"
+description: "Testing description"
+order: 3
+---
+
+# **Hyper-V Setup**
+
+1. Hyper-V needs to be turned on. The steps to do so are dependent on the version of Windows that you are using. If you are…
+    1. …using Windows 10:
+        1. Searching “Windows Powershell” and running it as Administrator
+            ![Highlighting the Windows Powershell option](/content/guides/misc/setting-up/hyperv/step1ai.png)
+        2. Pasting and entering Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All.
+        3. Rebooting your computer by entering Y .
+    2. …using Windows 11:
+        1. WORK IN PROGRESS!!!
+2. Install a pre-built Virtual Machine from Kali Linux’s website. A pre-built Virtual Machine in this case is a Virtual Machine that already has the Operating System installed - you only need to log in once the Virtual Machine is running for the first time!
+    1. As of writing this, the latest version is 2023.4 and you can find the pre-built Virtual Machine here.
+3. Extract the contents of the file.
+    1. You may need to install 7-zip to extract the files. Simply download the installer and go through it.
+    2. Right-click the file > 7-Zip > Extract Here
+        ![Showing the Extract Here option](/content/guides/misc/setting-up/hyperv/step3b.png)
+4. Open the extracted folder and run “install-vm.bat”.
+5. Search and run “Hyper-V Manager”.
+    ![Showing the Hyper-V Manager in the start menu](/content/guides/misc/setting-up/hyperv/step5.png)
+6. You should already see your Virtual Machine within the manager. Double click to open the Virtual Machine.
+    ![Showing the Virtual Machine in Hyper-V](/content/guides/misc/setting-up/hyperv/step6.png)
+7. You should see a new window popping up. Click the start button.
+    ![Showing the Virtual Machine interface](/content/guides/misc/setting-up/hyperv/step7.png)
+8. You should see a popup asking for the display resolution. I recommend you make it full screen by dragging the slider all the way to the right.
+    ![Showing the prompt for display resolution](/content/guides/misc/setting-up/hyperv/step7.png)
+9. You should see a login page. Login with the user “kali” and the password “kali”.
+    1. Don’t touch “Session”.
+        ![Showing the login details](/content/guides/misc/setting-up/hyperv/step9a.png)
+10. You have successfully set up your first Virtual Machine! (welcome message not included)
+    ![Showing the home screen of Kali Linux](/content/guides/misc/setting-up/hyperv/step10.png)
