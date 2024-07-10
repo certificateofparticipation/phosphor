@@ -4,6 +4,7 @@ import { Image } from "astro:assets";
 import { isLoggedIn } from "../lib/supabase";
 import ProgressBar from "../components/ProgressBar.astro";
 import * as crypto from "crypto";
+import {type BinaryLike} from "node:crypto";
 
 export const prerender = false
 
@@ -16,7 +17,7 @@ if (data == null) {
 
 const email = data.user?.email;
 const hash = crypto.createHash('sha256')
-hash.update(email)
+hash.update(email as BinaryLike)
 const emailHash = hash.digest('hex')
 ---
 
@@ -24,7 +25,7 @@ const emailHash = hash.digest('hex')
     <div class={"mx-10 my-10 flex flex-row gap-x-6"}>
         <div class={"bg-background-800 rounded-2xl p-3 flex flex-col justify-between"}>
             <div>
-                <Image class={"w-full aspect-square"} alt="Profile" inferSize={true} loading="loading" src={"https://www.gravatar.com/avatar/" + emailHash}/>
+                <Image class={"w-full aspect-square"} alt="Profile" inferSize={true} loading="eager" src={"https://www.gravatar.com/avatar/" + emailHash}/>
                 <hr class={"mt-3 mb-2 border-accent-300"}/>
                 <h3 class={"text-xl font-bold"}>Email:</h3>
                 <p class={"italic"}>{ email }</p>
@@ -43,21 +44,21 @@ const emailHash = hash.digest('hex')
             <div class={"bg-background-800 rounded-2xl p-3"}>
                 <h2 class={"text-2xl"}>Chapter 1 Progress:</h2>
                 <div class={"flex flex-col gap-y-1"}>
-                    <ProgressBar fill=40>Cryptography</ProgressBar>
-                    <ProgressBar fill=50>Forensics</ProgressBar>
-                    <ProgressBar fill=30>Open Source Intelligence</ProgressBar>
-                    <ProgressBar fill=20>Reverse Engineering</ProgressBar>
-                    <ProgressBar fill=70>Web Exploitation</ProgressBar>
-                    <ProgressBar fill=10>Binary Exploitation</ProgressBar>
+                    <ProgressBar fill="40">Cryptography</ProgressBar>
+                    <ProgressBar fill="50">Forensics</ProgressBar>
+                    <ProgressBar fill="30">Open Source Intelligence</ProgressBar>
+                    <ProgressBar fill="20">Reverse Engineering</ProgressBar>
+                    <ProgressBar fill="70">Web Exploitation</ProgressBar>
+                    <ProgressBar fill="10">Binary Exploitation</ProgressBar>
                 </div>
             </div>
             <div class={"bg-background-800 rounded-2xl p-3"}>
                 <h2 class={"text-2xl"}>Chapter 2 Progress:</h2>
                 <div class={"flex flex-col gap-y-1"}>
-                    <ProgressBar fill=40>Cryptography</ProgressBar>
-                    <ProgressBar fill=50>Forensics</ProgressBar>
-                    <ProgressBar fill=30>Web Exploitation</ProgressBar>
-                    <ProgressBar fill=20>Binary Exploitation</ProgressBar>
+                    <ProgressBar fill="40">Cryptography</ProgressBar>
+                    <ProgressBar fill="50">Forensics</ProgressBar>
+                    <ProgressBar fill="30">Web Exploitation</ProgressBar>
+                    <ProgressBar fill="20">Binary Exploitation</ProgressBar>
                 </div>
             </div>
         </div>
