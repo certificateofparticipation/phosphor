@@ -1,0 +1,17 @@
+---
+interface Props {
+    fill: number
+}
+
+const { fill } = Astro.props
+---
+
+<div>
+    <div class={"flex  justify-between px-0.5 text-md"}>
+        <p><slot/></p>
+        <p >{ fill + "%" }</p>
+    </div>
+    <div class={"w-full rounded-full h-4 bg-accent-700"}>
+        <div class={"bg-primary-400 rounded-full h-4"} style={"width: " + fill + "%"}></div>
+    </div>
+</div>

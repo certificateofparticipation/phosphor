@@ -17,10 +17,10 @@ export const GET: APIRoute = async ({ url, cookies, redirect }) => {
 
     const { access_token, refresh_token } = data.session;
 
-    cookies.set("sb-access-token", access_token, {
+    cookies.set("access-token", access_token, {
         path: "/",
     });
-    cookies.set("sb-refresh-token", refresh_token, {
+    cookies.set("refresh-token", refresh_token, {
         path: "/",
     });
 

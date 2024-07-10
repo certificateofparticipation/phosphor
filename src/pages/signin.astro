@@ -1,5 +1,15 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import {isLoggedIn} from "../lib/supabase";
+
+export const prerender = false
+
+const { cookies, redirect } = Astro;
+
+let data = await isLoggedIn(cookies)
+if (data != null) {
+    return redirect("/dashboard")
+}
 ---
 <Layout title="Sign In">
     <main class={"min-w-full flex-grow flex flex-col items-center justify-center gap-y-5"}>
@@ -15,7 +25,7 @@ import Layout from "../layouts/Layout.astro";
                     <input type="text" placeholder="Password" name="password" class="text-black"/>
                 </label>
                 <button type="submit" class={"border-2 border-accent-600 rounded-xl py-1.5 hover:bg-accent-600"}>Log In</button>
-                <button value="github" name="provider" type="submit">Login with GitHub</button>
+                <button value="github" name="provider" type="submit" class={"hover:underline text-accent-400"}>Login with GitHub</button>
             </form>
         </div>
         <a href={"/register"} class={"text-accent-400 hover:underline"}>Create a new account</a>

@@ -1,0 +1,64 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from "astro:assets";
+import {isLoggedIn} from "../lib/supabase";
+import ProgressBar from "../components/ProgressBar.astro";
+import * as crypto from "crypto";
+
+export const prerender = false
+
+const { cookies, redirect } = Astro;
+
+let data = await isLoggedIn(cookies)
+if (data == null) {
+    return redirect("/signin")
+}
+
+const email = data.user?.email;
+console.log(data)
+const hash = crypto.createHash('sha256')
+hash.update(email)
+const emailHash = hash.digest('hex')
+console.log(emailHash)
+---
+
+<Layout title="Dashboard">
+    <div class={"mx-10 my-10 flex flex-row gap-x-6"}>
+        <div class={"bg-background-800 rounded-2xl p-3"}>
+            <Image class={"w-full aspect-square"} alt="Profile" inferSize={true} loading="loading" src={"https://www.gravatar.com/avatar/" + emailHash}/>
+            <p>Email:</p>
+            <p>{ email }</p>
+            <p>Username:</p>
+            <p>PLACEHOLDER</p>
+            <p>Stats:</p>
+            <ol>
+              <li># pages read</li>
+                <li># challenges completed</li>
+                <li></li>
+            </ol>
+            <a href={"/api/auth/signout"} class={"text-red-500 hover:underline"}>Sign out</a>
+        </div>
+        <div class={"flex-grow flex flex-col gap-y-4"}>
+            <div class={"bg-background-800 rounded-2xl p-3"}>
+                <h2 class={"text-2xl"}>Chapter 1 Progress:</h2>
+                <div class={"flex flex-col gap-y-1"}>
+                    <ProgressBar fill=40>Cryptography</ProgressBar>
+                    <ProgressBar fill=50>Forensics</ProgressBar>
+                    <ProgressBar fill=30>Open Source Intelligence</ProgressBar>
+                    <ProgressBar fill=20>Reverse Engineering</ProgressBar>
+                    <ProgressBar fill=70>Web Exploitation</ProgressBar>
+                    <ProgressBar fill=10>Binary Exploitation</ProgressBar>
+                </div>
+            </div>
+            <div class={"bg-background-800 rounded-2xl p-3"}>
+                <h2 class={"text-2xl"}>Chapter 2 Progress:</h2>
+                <div class={"flex flex-col gap-y-1"}>
+                    <ProgressBar fill=40>Cryptography</ProgressBar>
+                    <ProgressBar fill=50>Forensics</ProgressBar>
+                    <ProgressBar fill=30>Web Exploitation</ProgressBar>
+                    <ProgressBar fill=20>Binary Exploitation</ProgressBar>
+                </div>
+            </div>
+        </div>
+    </div>
+</Layout>
