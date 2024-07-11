@@ -1,0 +1,17 @@
+---
+import {Clipboard} from "react-bootstrap-icons";
+interface Props {
+    toCopy: string
+}
+
+const { toCopy } = Astro.props
+
+
+---
+
+<br/>
+<div class={"my-2 bg-background-950 p-2 border-l-4 border-primary-600 w-fit flex items-center"}>
+    <code class={"text-primary-600 ml-2 mr-8"}><slot/></code>
+    <a class={"cursor-pointer"} target="copy"><Clipboard height="2rem" width="2rem"/></a>
+</div>
+

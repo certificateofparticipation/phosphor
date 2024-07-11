@@ -3,6 +3,7 @@ export const prerender = false;
 
 import Layout from "../../../../layouts/Layout.astro";
 import { getEntry, getCollection } from 'astro:content';
+import { ArrowUp } from "react-bootstrap-icons";
 
 const { chapter, section, page } = Astro.params;
 
@@ -90,22 +91,20 @@ const { Content, headings } = await entry!.render()
         </div>
         <div class={"flex justify-center"}>
             <a class={"bg-accent-600 p-3 rounded-full flex items-center gap-x-2 animate-bounce"} href="#top">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5"/>
-                </svg>
+                <ArrowUp size="32"/>
             </a>
         </div>
     </div>
 </Layout>
 
 <style is:global>
-    .content > h1 {
+    .content h1:not(astro-island *) {
         @apply text-5xl
     }
-    .content a {
+    .content a:not(astro-island *) {
         @apply text-accent-400 font-bold hover:underline
     }
-    .content img {
+    .content img:not(astro-island *) {
         @apply my-2
     }
 
@@ -116,6 +115,10 @@ const { Content, headings } = await entry!.render()
     .content > ol > li > ol,
     .content > ul > li > ul {
         @apply list-disc ml-5
+    }
+    .content > ol > li > ol > li > ol,
+    .content > ul > li > ul > li > ul{
+        @apply list-disc ml-[1.875rem]
     }
 
 
