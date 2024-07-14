@@ -1,0 +1,30 @@
+---
+interface Props {
+    type: "warning" | "note" | "info"
+}
+
+const { type } = Astro.props
+
+let borderColour: string
+let header: string
+switch (type) {
+    case "warning":
+        borderColour = "border-l-red-400"
+        header = "WARNING!"
+        break
+    case "note":
+        borderColour = "border-l-yellow-400"
+        header = "Note:"
+        break
+    case "info":
+        borderColour = "border-l-green-400"
+        header = "Info:"
+        break
+}
+
+---
+
+<div class={"special bg-background-800 p-5 flex flex-col gap-y-2 border-l-8 " + borderColour}>
+    <h3 class={"font-bold text-2xl"}>{ header }</h3>
+    <slot/>
+</div>

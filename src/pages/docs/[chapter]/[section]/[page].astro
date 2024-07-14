@@ -1,12 +1,12 @@
 ---
 import Layout from "../../../../layouts/Layout.astro";
-import { ArrowUp } from "react-bootstrap-icons";
-import { getCollection } from 'astro:content';
+import { ChevronBarUp } from "react-bootstrap-icons";
+import { getCollection } from "astro:content";
 import Navbar from "../../../../components/Navbar.astro";
 import {splitSlug} from "../../../../lib/slug";
 
 export async function getStaticPaths() {
-    const entries = await getCollection('guides');
+    const entries = await getCollection("guides");
 
     function getParams(slug: string) {
         let [ entryChapter, entrySection, entryName ] = splitSlug(slug)
@@ -30,7 +30,47 @@ const { entry } = Astro.props
 const { Content } = await entry.render()
 ---
 
-<span id="top"/>
+<script>
+    const toTopButton = document.getElementById("to-top")
+    const progressBar = document.getElementById("progress-bar")
+    const totalLength = progressBar.getTotalLength()
+
+    progressBar.style.strokeDasharray = totalLength
+    progressBar.style.strokeDashoffset = totalLength
+
+    toTopButton.addEventListener("click", () => window.scrollTo(0, 0))
+    window.addEventListener("scroll", () => {
+        if (window.scrollY < 100) {
+            toTopButton.classList.add("opacity-0", "pointer-events-none")
+            toTopButton.classList.remove("opacity-100")
+        } else {
+            toTopButton.classList.add("opacity-100")
+            toTopButton.classList.remove("opacity-0", "pointer-events-none")
+        }
+
+        setProgress(progressBar, totalLength)
+    });
+
+    function setProgress(progressBar, totalLength) {
+        const clientHeight = document.documentElement.clientHeight;
+        const scrollHeight = document.documentElement.scrollHeight;
+        const scrollTop = document.documentElement.scrollTop;
+
+        const percentage = scrollTop / (scrollHeight - clientHeight);
+        progressBar.style.strokeDashoffset = totalLength - totalLength * percentage;
+    }
+</script>
+
+<button class="bg-accent-700 rounded-full fixed bottom-5 right-5 opacity-0 transition-opacity duration-200 pointer-events-none grid grid-rows-1 grid-cols-1"
+        id="to-top">
+    <svg class={"-rotate-90"} style={{"grid-area": "1 / 1 / 2 / 2"}} width="50" height="50" xmlns="https://www.w3.org/2000/svg">
+        <circle class={"stroke-accent-300 stroke-[0.3rem] fill-transparent"} style={"stroke-linecap: round;"} id="progress-bar" cx="25" cy="25" r="22.5"></circle>
+    </svg>
+    <span class={"w-full h-full flex items-center justify-center"} style={{"grid-area": "1 / 1 / 2 / 2"}}>
+        <ChevronBarUp size={32}/>
+    </span>
+</button>
+
 <Layout title={ entry.data.title }>
     <div class={"flex flex-col px-48 py-12 gap-y-12"}>
         <div class={"flex flex-grow gap-x-8"}>
@@ -39,22 +79,17 @@ const { Content } = await entry.render()
                 <Content/>
             </div>
         </div>
-        <div class={"flex justify-center"}>
-            <a class={"bg-accent-600 p-3 rounded-full flex items-center gap-x-2 animate-bounce"} href="#top">
-                <ArrowUp size="32"/>
-            </a>
-        </div>
     </div>
 </Layout>
 
 <style is:global>
-    .content h1:not(astro-island *) {
+    .content h1:not(astro-island *, .special *) {
         @apply text-5xl
     }
-    .content a:not(astro-island *) {
+    .content a:not(astro-island *, .special *) {
         @apply text-accent-400 font-bold hover:underline
     }
-    .content img:not(astro-island *) {
+    .content img:not(astro-island *, .special *) {
         @apply my-2
     }
 
