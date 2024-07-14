@@ -31,12 +31,12 @@ const { Content } = await entry.render()
 ---
 
 <script>
-    const toTopButton = document.getElementById("to-top")
-    const progressBar = document.getElementById("progress-bar")
-    const totalLength = progressBar.getTotalLength()
+    const toTopButton = document.getElementById("to-top")!
+    const progressBar: SVGGeometryElement = (document.getElementById("progress-bar")! as unknown) as SVGGeometryElement
+    const totalLength: number = progressBar.getTotalLength()!
 
-    progressBar.style.strokeDasharray = totalLength
-    progressBar.style.strokeDashoffset = totalLength
+    progressBar.style.strokeDasharray = String(totalLength)
+    progressBar.style.strokeDashoffset = String(totalLength)
 
     toTopButton.addEventListener("click", () => window.scrollTo(0, 0))
     window.addEventListener("scroll", () => {
@@ -51,13 +51,13 @@ const { Content } = await entry.render()
         setProgress(progressBar, totalLength)
     });
 
-    function setProgress(progressBar, totalLength) {
+    function setProgress(progressBar: SVGGeometryElement, totalLength: number) {
         const clientHeight = document.documentElement.clientHeight;
         const scrollHeight = document.documentElement.scrollHeight;
         const scrollTop = document.documentElement.scrollTop;
 
         const percentage = scrollTop / (scrollHeight - clientHeight);
-        progressBar.style.strokeDashoffset = totalLength - totalLength * percentage;
+        progressBar.style.strokeDashoffset = String(totalLength - totalLength * percentage);
     }
 </script>
 
@@ -75,7 +75,7 @@ const { Content } = await entry.render()
     <div class={"flex flex-col px-48 py-12 gap-y-12"}>
         <div class={"flex flex-grow gap-x-8"}>
             <Navbar currentSlug={ entry.slug }/>
-            <div class={"content flex flex-col gap-y-2.5"}>
+            <div class={"content flex flex-col gap-y-2.5 flex-grow"}>
                 <Content/>
             </div>
         </div>
@@ -84,7 +84,16 @@ const { Content } = await entry.render()
 
 <style is:global>
     .content h1:not(astro-island *, .special *) {
-        @apply text-5xl
+        @apply text-5xl pb-2 border-b-2 border-accent-700
+    }
+    .content h2:not(astro-island *, .special *) {
+        @apply text-4xl pb-2 border-b-2 border-accent-700
+    }
+    .content h3:not(astro-island *, .special *) {
+        @apply text-3xl pb-2 border-b-2 border-accent-700
+    }
+    .content h4:not(astro-island *, .special *) {
+        @apply text-2xl
     }
     .content a:not(astro-island *, .special *) {
         @apply text-accent-400 font-bold hover:underline
@@ -92,10 +101,17 @@ const { Content } = await entry.render()
     .content img:not(astro-island *, .special *) {
         @apply my-2
     }
+    .content table:not(astro-island *, .special *) {
+        @apply table-auto
+    }
+    .content table:not(astro-island *, .special *) th,
+    .content table:not(astro-island *, .special *) td {
+        @apply border-2 border-accent-600 py-3 pl-3 text-left
+    }
 
     .content > ol,
     .content > ul {
-        @apply list-disc ml-2.5
+        @apply list-disc ml-5
     }
     .content > ol > li > ol,
     .content > ul > li > ul {
@@ -103,7 +119,7 @@ const { Content } = await entry.render()
     }
     .content > ol > li > ol > li > ol,
     .content > ul > li > ul > li > ul{
-        @apply list-disc ml-[1.875rem]
+        @apply list-disc ml-5
     }
 
 

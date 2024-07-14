@@ -1,6 +1,5 @@
 ---
-import {splitSlug} from "../lib/slug";
-import {splitSlug} from "../lib/slug";
+import { splitSlug } from "../lib/slug";
 import { getCollection } from 'astro:content';
 
 interface Props {
@@ -8,7 +7,7 @@ interface Props {
 }
 
 const { currentSlug } = Astro.props
-let [ chapter, section, name ] = splitSlug(currentSlug)
+let [ chapter, _, __ ] = splitSlug(currentSlug)
 
 const entries = await getCollection("guides")
 

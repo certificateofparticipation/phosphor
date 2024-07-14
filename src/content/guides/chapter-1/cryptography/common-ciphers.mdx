@@ -3,11 +3,44 @@ title: "Common Ciphers"
 description: "Testing description"
 order: 1
 ---
-
 import Callout from "../../../../components/guides/Callout.astro"
 
-test
+# **Common Ciphers**
+
+In most beginner cryptography challenges, the difficulty is to identify the cipher used.
+While there will definitely be some challenges that use an obscure cipher, most challenges will use a few common ciphers.
+It would be invaluable to be able to quickly recognise some ciphers in order to quickly decode your message.
+
+Dcode has a [website](https://www.dcode.fr/cipher-identifier) that automatically identifies your cipher. It is not perfect, but it might give you a clue.
+
+To decode your message after identifying the cipher, try searching online for an online decoder.
+
+- [Cyberchef](https://gchq.github.io/CyberChef/) has multiple decoders for popular ciphers. It also has the ability to automatically decode ciphertexts if it recognises the cipher.
+
+![Cyberchef magic function demonstration](/content/guides/chapter-1/cryptography/common-ciphers/cyberchef-magic.png)
+
+- [Dencode](https://dencode.com/en/) allows you to attempt decoding a ciphertext using multiple ciphers.
+
+![Dencode demonstration](/content/guides/chapter-1/cryptography/common-ciphers/dencode.png)
+
+
+<Callout type={"note"}>
+    <p>Some ciphers need keys or special options in order to decode your ciphertext. You will need to get this somewhere from the challenge.</p>
+    <p>Try to find the key or options in the challenge description, especially if it is longer than usual.</p>
+    <p>Otherwise, it is possible to bruteforce the key for some ciphers, especially ROT ciphers.</p>
+</Callout>
 
 <Callout type={"info"}>
-    test
+    <p>A very common cipher used - even outside of cryptography challenges - is Base64.</p>
+    <p>Although the example below does not show it, Base64 encoded messages nearly always have "=" characters trailing it.</p>
 </Callout>
+
+| Cipher Name | Example Ciphertext (Plaintext: "Hello world!")   |
+|-------------|--------------------------------------------------|
+| ROT-13      | Uryyb jbeyq! (Note that "!" was not encoded)     |
+| ROT-47      | w6==@ H@C=5P                                     |
+| Morse       | .... . .-.. .-.. --- .-- --- .-. .-.. -.. -.-.-- |
+| Base64      | SGVsbG8gd29ybGQh                                 |
+| Vignere     | (Key: foobar) Mszmo ntfze!                       |
+| Railfence   | (Key: 2, Offset: 0) Hlowrdel ol!                 |
+| Keyboard    | (QWERTY, Shift right by 1) Jr;;p ept;f@          |

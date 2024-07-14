@@ -1,0 +1,41 @@
+---
+title: "Hashes"
+description: "Testing description"
+order: 2
+---
+
+# **Hashes**
+
+Not all ciphertexts are made to be decrypted! We usually call these ciphertexts "hashes", and the corresponding ciphers are called "hash algorithms".
+
+All hash algorithms should be:
+- "Chaotic", where they will produce a completely different result on the slightest change to the plaintext.
+- "Collision resistant", where "hash collisions", which is 2 plain text having the same hash, should not happen.
+- "Deterministic", where the same plain text should always have the same hash.
+
+| Algorithm Name | Description                                                                                                                                                                 |
+|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| MD5            | The fastest algorithm among the three, but also not collision resistant.                                                                                                    |
+| SHA1           | The second fastest algorithm among the three, but also not collision resistant.                                                                                             |
+| SHA-2          | A grouping of multiple hash algorithms, including SHA-224, SHA-256, SHA-384, SHA-512, SHA-512/224, SHA-512/256.<br/>The slowest among the three but is collision resistant. |
+
+However, just because a cipher was made to be un-decryptable, it does not mean that you can’t!
+
+Since hash algorithms are deterministic, it is possible to prepare a table containing precomputed hashes of common passwords, or really any string. Then, we can compare the hash we want to decrypt to this table, finding out the resulting plaintext. Such a table is called a rainbow table.
+
+A popular rainbow table searcher website is called [CrackStation](https://crackstation.net/).
+
+## **Salts**
+
+One way to mitigate rainbow tables is to utilise salts.
+
+Let's create a salt called “foobar”.
+We can now add this salt to the end of our plaintext. If we want to hash “Hello world!”, our plaintext with the salt might be “Hello world!foobar”.
+Salts don’t have to be added to the end of the original plaintext, but it is the easiest and most common way.
+
+Hashing “Hello world!foobar” with the MD5 hash algorithm would give us “9eea7c53efe4571fec80019633766b9f”.
+We see that no results pop up in CrackStation now.
+
+![](/content/guides/chapter-1/cryptography/hashes/salts.png)
+
+It is important to create a sufficiently random salt. Otherwise, the new hash risks the chance of being pre-computed.
