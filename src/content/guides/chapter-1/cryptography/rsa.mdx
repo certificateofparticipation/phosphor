@@ -1,0 +1,29 @@
+---
+title: "RSA"
+description: "Testing description"
+order: 3
+---
+
+# **RSA**
+
+RSA stands for Rivest-Shamir-Adleman. It is a cipher that is still used to this very day.
+
+So far, the [ciphers you learnt so far](/docs/chapter-1/cryptography/common-ciphers) are called "symmetric ciphers". These ciphers use the same algorithm to encode and decode a message,
+and you can decrypt a ciphertext as long as you have the same keys/options used to encrypt it.
+
+However, RSA is an "asymmetric cipher". These ciphers make use of multiple keys, one for encrypting and one for decrypting a message.
+
+The key used to encrypt the plaintext is called the "public key", while the key used to decrypt the ciphertext is called the "private key".
+As the name suggests, public keys are meant to be accessible to everybody, while private keys should be kept a secret, away from attackers.
+
+In CTFs, questions involving RSA usually require you to recover the private key to an encrypted message.
+
+### Calculating a key
+
+| Variable | Description                   | Privacy |
+|----------|-------------------------------|---------|
+| p        | Prime number 1                | Private |
+| q        | Prime number 2                | Private |
+| n        | p * n                         | Public  |
+| e        | Integer, usually 65537        | Public  |
+| d        | Bunch of math from p, q and e | Private |
