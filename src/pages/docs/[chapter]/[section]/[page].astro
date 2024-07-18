@@ -101,6 +101,9 @@ const { Content } = await entry.render()
     .content img:not(astro-island *, .special *) {
         @apply my-2
     }
+    .content code:not(astro-island *, .special *) {
+        @apply bg-background-700 rounded-md py-0.5 px-1
+    }
     .content table:not(astro-island *, .special *) {
         @apply table-auto
     }

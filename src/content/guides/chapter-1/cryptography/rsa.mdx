@@ -22,8 +22,13 @@ In CTFs, questions involving RSA usually require you to recover the private key 
 
 | Variable | Description                   | Privacy |
 |----------|-------------------------------|---------|
+| c        | Ciphertext                    | Public  |
 | p        | Prime number 1                | Private |
 | q        | Prime number 2                | Private |
 | n        | p * n                         | Public  |
 | e        | Integer, usually 65537        | Public  |
 | d        | Bunch of math from p, q and e | Private |
+
+Usually in a challenge, you will be given `c`, `n` and `e`. Your job is to somehow get `d` in order to decode `c`.
+
+[DCode](https://www.dcode.fr/rsa-cipher) has a website to decode RSA ciphertexts using the above variables.
