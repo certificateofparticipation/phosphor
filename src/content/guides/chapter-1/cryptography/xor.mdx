@@ -1,0 +1,49 @@
+---
+title: "XOR"
+description: "Testing description"
+order: 4
+---
+import Challenge from "../../../../components/guides/Challenge.tsx";
+import Hint from "../../../../components/guides/Hint.tsx"
+import Callout from "../../../../components/guides/Callout.astro"
+
+# **XOR**
+
+XOR (otherwise called eXclusive OR) is a logical operation (like AND, OR, NOT). While normally only meant for binary data, it can also be used on text.
+
+By converting the plaintext and the key into its hexadecimal equivalent in ASCII, we can now use XOR to produce the ciphertext! The ciphertext can also be XORed with the same key to produce the plaintext.
+
+<Callout type={"note"}>
+    <p>When decrypting using XOR, do remember to convert the plaintext from hexadecimal to text, since XOR operations only work on hexadecimal.</p>
+</Callout>
+
+[Cyberchef](https://gchq.github.io/CyberChef/) has a XOR operation to encrypt/decrypt __hexadecimal__ with XOR. When entering your key, you can specify the format the key is in.
+This is useful if you want to enter a key as just text. Select the "LATIN1" option to automatically convert the key from ASCII into hexadecimal.
+
+![](/content/guides/chapter-1/cryptography/xor/cyberchef-key.png)
+
+<Challenge client:visible title={"Challenge 1"} answer={["hello world"]} placeholder={"..."}>
+    <p>What is the plaintext to this ciphertext, using the key <code>pineapple</code>?</p>
+    <code>465158505713460f53165b5e525646165b57460a5851</code>
+    <Hint client:visible>
+        <p>In Cyberchef, text in the input field is... well text.</p>
+        <p>You need to convert the input text into hexadecimal first. An analogy is that "5" is not really 5 in code, since both have different types.</p>
+        <p>You can convert text into hexadecimal using the "From Hex" operation.</p>
+        ![](/content/guides/chapter-1/cryptography/xor/cyberchef.png)
+    </Hint>
+</Challenge>
+
+## Known Plaintext Attack / Crib Dragging
+
+Known Plaintext Attack relies on you know part of the plaintext (who would have guessed) in order to get the key.
+
+This attack relies on two facts:
+- XORing a ciphertext and its plaintext will result in the key.
+  - Ciphertext ⊕ Key = Plaintext
+  - Ciphertext ⊕ Plaintext = Key
+- When a key is shorter than the cipher text, the key will be repeated until it matches the plaintext.
+  - Since each bit of one value needs another bit from the other value, the key has to be extended somehow.
+  - For example:
+    - Plaintext: watermelons
+    - Key: water______
+    - Final key: waterwaterw

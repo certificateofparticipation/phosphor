@@ -3,6 +3,7 @@ title: "Hashes"
 description: "Testing description"
 order: 2
 ---
+import Challenge from "../../../../components/guides/Challenge.tsx"
 
 # **Hashes**
 
@@ -23,7 +24,19 @@ However, just because a cipher was made to be un-decryptable, it does not mean t
 
 Since hash algorithms are deterministic, it is possible to prepare a table containing precomputed hashes of common passwords, or really any string. Then, we can compare the hash we want to decrypt to this table, finding out the resulting plaintext. Such a table is called a rainbow table.
 
-A popular rainbow table searcher website is called [CrackStation](https://crackstation.net/).
+A popular rainbow table searcher website is called [CrackStation](https://crackstation.net/). You can enter the hashes you want to crack and it will find the plaintext if its available.
+
+![](/content/guides/chapter-1/cryptography/hashes/crackstation.png)
+
+<Challenge client:visible title={"Challenge 1"} answer={["cracked"]} placeholder={"..."}>
+    <p>What is the plaintext of this hash?</p>
+    <code>cc8b1415557f58abf2e2fa83c2ea6c91</code>
+</Challenge>
+
+<Challenge client:visible title={"Challenge 2"} answer={["cryptography"]} placeholder={"..."}>
+    <p>What is the plaintext of this hash?</p>
+    <code>e0d00b9f337d357c6faa2f8ceae4a60d</code>
+</Challenge>
 
 ## **Salts**
 

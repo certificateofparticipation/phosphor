@@ -83,32 +83,32 @@ const { Content } = await entry.render()
 </Layout>
 
 <style is:global>
-    .content h1:not(astro-island *, .special *) {
+    .content h1:not(.ignore) {
         @apply text-5xl pb-2 border-b-2 border-accent-700
     }
-    .content h2:not(astro-island *, .special *) {
+    .content h2:not(.ignore) {
         @apply text-4xl pb-2 border-b-2 border-accent-700
     }
-    .content h3:not(astro-island *, .special *) {
+    .content h3:not(.ignore) {
         @apply text-3xl pb-2 border-b-2 border-accent-700
     }
-    .content h4:not(astro-island *, .special *) {
+    .content h4:not(.ignore) {
         @apply text-2xl
     }
-    .content a:not(astro-island *, .special *) {
+    .content a:not(.ignore) {
         @apply text-accent-400 font-bold hover:underline
     }
-    .content img:not(astro-island *, .special *) {
+    .content img:not(.ignore) {
         @apply my-2
     }
-    .content code:not(astro-island *, .special *) {
+    .content code:not(.ignore) {
         @apply bg-background-700 rounded-md py-0.5 px-1
     }
-    .content table:not(astro-island *, .special *) {
+    .content table:not(.ignore) {
         @apply table-auto
     }
-    .content table:not(astro-island *, .special *) th,
-    .content table:not(astro-island *, .special *) td {
+    .content table:not(.ignore) th,
+    .content table:not(.ignore) td {
         @apply border-2 border-accent-600 py-3 pl-3 text-left
     }
 

@@ -30,7 +30,7 @@ export default function Challenge({title, answer, placeholder, children}: {title
 
     return (
         <div className={"bg-background-800 rounded-3xl px-8 py-6 my-2"}>
-            <h1 className={"text-4xl font-bold"}>{title}</h1>
+            <h1 className={"ignore text-4xl font-bold"}>{title}</h1>
             <div className={"my-3 flex flex-col gap-y-2"}>
                 { children }
             </div>
